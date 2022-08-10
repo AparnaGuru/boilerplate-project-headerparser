@@ -19,6 +19,18 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+
+var respJson = {};
+app.get('/api/whoami', function (req, res) {
+
+  var ip = require("ip");
+  respJson["ipaddress"] = ip.address()
+  respJson["language"] = req.header("Accept-Language")
+  respJson["software"] = req.header("User-Agent")
+  res.json(respJson)
+  
+});
+
 // your first API endpoint...
 app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
